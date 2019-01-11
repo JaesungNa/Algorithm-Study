@@ -1,5 +1,7 @@
 package bj1260;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -16,6 +18,7 @@ public class Main {
     private static int V; //First Vertex to start with
     private static int[][] adj; //Adjacent array to store input data
     private static boolean[] isVisited; //check visited vertex
+    private static Queue<Integer> queue = new LinkedList<>(); //queue is used in bfs
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -23,9 +26,9 @@ public class Main {
         M = sc.nextInt();
         V = sc.nextInt();
 
-        adj = new int[N + 1][M + 1]; //index 1부터 시작
+        adj = new int[N + 1][N + 1]; //index 1부터 시작
         isVisited = new boolean[N + 1];
-        initVisited();
+
 
         for (int i = 0; i < M; i++) {
             int row = sc.nextInt();
@@ -34,25 +37,37 @@ public class Main {
             adj[row][col] = 1;
             adj[col][row] = 1;
         }
+
+        initVisited();
+        dfs(V);
+
+        initVisited();
+        bfs(V);
+
     }
 
     /**
      * DFS
      *
-     * @param : first vertex to start with
-     * @return : nothing
+     * @param v : first vertex to start with
      */
-    public static void dfs(int v){
-
+    public static void dfs(int v) {
+        if (isVisited[v] == true) return;
+        isVisited[v] = true;
+        System.out.print(v + " ");
+        for (int i = 0; i < adj[v].length; i++) {
+            if (isVisited[i] == false && adj[v][i] == 1) {
+                dfs(i);
+            }
+        }
     }
 
     /**
      * BFS
      *
-     * @param : first vertex to start with
-     * @return : nothing
+     * @param v : first vertex to start with
      */
-    public static void bfs(int v){
+    public static void bfs(int v) {
 
     }
 
