@@ -41,6 +41,8 @@ public class Main {
         initVisited();
         dfs(V);
 
+        System.out.println();
+
         initVisited();
         bfs(V);
 
@@ -68,7 +70,18 @@ public class Main {
      * @param v : first vertex to start with
      */
     public static void bfs(int v) {
-
+        queue.add(v);
+        while (!queue.isEmpty()) {
+            int temp = queue.poll();
+            isVisited[temp] = true;
+            System.out.print(temp + " ");
+            for (int i = 0; i < adj[temp].length; i++) {
+                if (isVisited[i] == false && adj[temp][i] == 1) {
+                    queue.add(i);
+                    isVisited[i] = true;
+                }
+            }
+        }
     }
 
 
