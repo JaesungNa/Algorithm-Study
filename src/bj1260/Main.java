@@ -91,12 +91,4 @@ public class Main {
         }
     }
 
-    public static void printAdj() {
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                System.out.print(adj[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
 }
