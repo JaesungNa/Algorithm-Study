@@ -14,13 +14,14 @@ public class Main {
     private static int numOfEdges; // number of edges in given graph
     private static int[][] adj; // adjacent matrix to store graph
     private static boolean[] isVisited; // to store visited vertex in graph
+    private static int maxContamination = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         numOfVertex = sc.nextInt();
         numOfEdges = sc.nextInt();
         adj = new int[numOfVertex + 1][numOfVertex + 1];
-        isVisited = boolean[numOfVertex + 1];
+        isVisited = new boolean[numOfVertex + 1];
 
         for(int i=0; i<numOfEdges; i++){
             int row = sc.nextInt();
@@ -30,10 +31,9 @@ public class Main {
         }
 
         initVisited();
+        spreadVirus(1, 0);
 
-        spreadVirus();
-
-
+        System.out.println(maxContamination);
     }
 
     /**
@@ -42,8 +42,19 @@ public class Main {
      *
      * @param v : computer1(starting vertex)
      */
-    private static void spreadVirus(int v){
-
+    private static void spreadVirus(int v, int curContamination){
+        if(isVisited[v]==true) return;
+        isVisited[v]=true;
+        curContamination++;
+        for(int i=1; i<adj[v].length;i++){
+            if(isVisited[i]==false && adj[v][i]==1) {
+                spreadVirus(i, curContamination);
+            }
+        }
+        //시작 정점에서 모든 리프정점까지의 길이 중 가장 높은 길이를 선택
+        if (maxContamination < curContamination) {
+            maxContamination = curContamination;
+        }
     }
 
     /**
