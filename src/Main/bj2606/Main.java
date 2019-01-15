@@ -7,6 +7,8 @@ package bj2606;
  * @author jaesungna
  */
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
@@ -31,31 +33,35 @@ public class Main {
         }
 
         initVisited();
-        spreadVirus(1, 0);
+        spreadVirus(1);
 
         System.out.println(maxContamination);
     }
 
+
     /**
      * To find the maximum number of computer that is contaminated by computer 1(starting vertex)
-     * DFS method used
+     * BFS method used
      *
      * @param v : computer1(starting vertex)
      */
-    private static void spreadVirus(int v, int curContamination){
-        if(isVisited[v]==true) return;
-        isVisited[v]=true;
-        curContamination++;
-        for(int i=1; i<adj[v].length;i++){
-            if(isVisited[i]==false && adj[v][i]==1) {
-                spreadVirus(i, curContamination);
+    private static void spreadVirus(int v){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(v);
+        while(!queue.isEmpty()){
+            int temp = queue.poll();
+            isVisited[temp]=true;
+            for(int i = 1; i<adj[temp].length;i++){
+                if(isVisited[i]==false && adj[temp][i]==1){
+                    queue.add(i);
+                    isVisited[i]=true;
+                    maxContamination++;
+                }
             }
         }
-        //시작 정점에서 모든 리프정점까지의 길이 중 가장 높은 길이를 선택
-        if (maxContamination < curContamination) {
-            maxContamination = curContamination;
-        }
     }
+
+
 
     /**
      * Initialising isVisited array
