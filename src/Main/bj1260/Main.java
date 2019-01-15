@@ -19,6 +19,7 @@ public class Main {
     private static int[][] adj; //Adjacent array to store input data
     private static boolean[] isVisited; //check visited vertex
     private static Queue<Integer> queue = new LinkedList<>(); //queue is used in bfs
+    private static StringBuffer sb = new StringBuffer();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -41,11 +42,11 @@ public class Main {
         initVisited();
         dfs(V);
 
-        System.out.println();
+        sb.append("\n");
 
         initVisited();
         bfs(V);
-
+        System.out.println(sb);
     }
 
     /**
@@ -56,7 +57,7 @@ public class Main {
     public static void dfs(int v) {
         if (isVisited[v] == true) return;
         isVisited[v] = true;
-        System.out.print(v + " ");
+        sb.append(v+" ");
         for (int i = 0; i < adj[v].length; i++) {
             if (isVisited[i] == false && adj[v][i] == 1) {
                 dfs(i);
@@ -74,7 +75,7 @@ public class Main {
         while (!queue.isEmpty()) {
             int temp = queue.poll();
             isVisited[temp] = true;
-            System.out.print(temp + " ");
+            sb.append(temp+" ");
             for (int i = 0; i < adj[temp].length; i++) {
                 if (isVisited[i] == false && adj[temp][i] == 1) {
                     queue.add(i);
