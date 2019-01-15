@@ -19,15 +19,28 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         numOfVertex = sc.nextInt();
         numOfEdges = sc.nextInt();
+        adj = new int[numOfVertex + 1][numOfVertex + 1];
+        isVisited = boolean[numOfVertex + 1];
+
+        for(int i=0; i<numOfEdges; i++){
+            int row = sc.nextInt();
+            int col = sc.nextInt();
+            adj[row][col]=1;
+            adj[col][row]=1;
+        }
+
+        initVisited();
+
+    }
 
 
-//        7
-//        6
-//        1 2
-//        2 3
-//        1 5
-//        5 2
-//        5 6
-//        4 7
+    /**
+     * initialsing isVisited array
+     *
+     */
+    private static void initVisited() {
+        for (int i = 0; i < isVisited.length; i++) {
+            isVisited[i] = false;
+        }
     }
 }
