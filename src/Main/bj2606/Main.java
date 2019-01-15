@@ -31,11 +31,23 @@ public class Main {
 
         initVisited();
 
+        spreadVirus();
+
+
     }
 
+    /**
+     * To find the maximum number of computer that is contaminated by computer 1(starting vertex)
+     * DFS method used
+     *
+     * @param v : computer1(starting vertex)
+     */
+    private static void spreadVirus(int v){
+
+    }
 
     /**
-     * initialsing isVisited array
+     * Initialising isVisited array
      *
      */
     private static void initVisited() {
