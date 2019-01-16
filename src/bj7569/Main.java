@@ -8,16 +8,16 @@ import java.util.Scanner;
 /**
  * 백준 알고리즘
  * #7569 토마토
- * 알고리즘 분류 :
+ * 알고리즘 분류 : BFS 활용(3차원)
  *
  * @author jaesungna
  */
 public class Main {
     private static int[][][] MAP;
-    private static boolean[][][] isVisited;
     private static int[] dh = {0, 0, 0, 0, 1, -1};
     private static int[] dw = {0, 0, 1, -1, 0, 0};
     private static int[] dl = {1, -1, 0, 0, 0, 0};
+    private static int cnt = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -25,7 +25,6 @@ public class Main {
         int N = sc.nextInt(); //length
         int H = sc.nextInt(); //height
         MAP = new int[H][N][M];
-        isVisited = new boolean[H][N][M];
 
         int MAX = 0;
 
@@ -33,6 +32,9 @@ public class Main {
             for (int l = 0; l < N; l++) {
                 for (int w = 0; w < M; w++) {
                     MAP[h][l][w] = sc.nextInt();
+                    if (MAP[h][l][w] == 0) {
+                        cnt++;
+                    }
                 }
             }
         }
@@ -43,8 +45,10 @@ public class Main {
                     if (MAP[h][l][w] == 1) {
                         Position pos = new Position(h, l, w);
                         int tempMax = bfs(M, N, H, pos);
-                        if(MAX<tempMax || tempMax==-1){
-                            MAX=tempMax;
+                        if (cnt > 0) {
+                            MAX = -1;
+                        } else if (MAX < tempMax) {
+                            MAX = tempMax;
                         }
                     }
                 }
@@ -63,29 +67,21 @@ public class Main {
             int h = tempPos.h;
             int w = tempPos.w;
             int l = tempPos.l;
-            isVisited[h][l][w] = true;
+            MAP[h][l][w] = 1;
             for (int cur = 0; cur < 6; cur++) {
                 int nh = dh[cur] + h;
                 int nw = dw[cur] + w;
                 int nl = dl[cur] + l;
                 if (nh >= 0 && nw >= 0 && nl >= 0 && nh < H && nl < N && nw < M) {
-                    if (isVisited[nh][nl][nw] == false && MAP[nh][nl][nw] == 0) {
+                    if (MAP[nh][nl][nw] == 0) {
+                        cnt--;
                         Position newPos = new Position(nh, nl, nw);
                         queue.add(newPos);
-                        isVisited[nh][nl][nw] = true;
+                        MAP[nh][nl][nw] = 1;
                         dist[nh][nl][nw] = dist[h][l][w] + 1;
                         if (tempMax < dist[nh][nl][nw]) {
                             tempMax = dist[nh][nl][nw];
                         }
-                    }
-                }
-            }
-        }
-        for (int h = 0; h < H; h++) {
-            for (int l = 0; l < N; l++) {
-                for (int w = 0; w < M; w++) {
-                    if(isVisited[h][l][w]==false && MAP[h][l][w]==0){
-                        return -1;
                     }
                 }
             }
