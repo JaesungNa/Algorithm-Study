@@ -16,7 +16,7 @@ public class Main {
     private static boolean[][] isVisited; // to store visited location
     private static int[] dx = {0, 1, 0, -1};
     private static int[] dy = {1, 0, -1, 0};
-    private static int minTime;
+    private static int MaxDist = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -36,13 +36,22 @@ public class Main {
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                Point curPos = new Point(i, j);
-                bfs(curPos);
+                if (MAP[i][j].equals("L")) {
+                    initVisited();
+                    Point curPos = new Point(i, j);
+                    int tempMax = bfs(curPos);
+                    if(tempMax>MaxDist){
+                        MaxDist=tempMax;
+                    }
+                }
             }
         }
+        System.out.println(MaxDist);
     }
 
     private static int bfs(Point pos) {
+        int tempMax = 0;
+        int[][] DIST = new int[MAP.length][MAP[0].length];
         Queue<Point> queue = new LinkedList<>();
         queue.add(pos);
         while (!queue.isEmpty()) {
@@ -55,19 +64,38 @@ public class Main {
                 int nx = dx[i] + x;
                 int ny = dy[i] + y;
 
-                if (nx > 0 && ny > 0 && isVisited[nx][ny] == false && MAP[nx][ny]=="L"){
-                    Point nextPos = new Point(nx, ny);
-                    queue.add(nextPos);
-                    isVisited[nx][ny]=true;
+                if (nx >= 0 && ny >= 0 && nx < MAP.length && ny < MAP[0].length) {
+                    if (isVisited[nx][ny] == false && MAP[nx][ny].equals("L")) {
+                        Point nextPos = new Point(nx, ny);
+                        queue.add(nextPos);
+                        isVisited[nx][ny] = true;
+                        DIST[nx][ny] = DIST[x][y] + 1;
+                        if (tempMax < DIST[nx][ny]) {
+                            tempMax = DIST[nx][ny];
+                        }
+                    }
                 }
+            }
+        }
+        return tempMax;
+    }
+
+    /**
+     * Initialising isVisited array
+     *
+     */
+    private static void initVisited() {
+        for (int i = 0; i < isVisited.length; i++) {
+            for (int j = 0; j < isVisited[i].length; j++) {
+                isVisited[i][j] = false;
             }
         }
     }
 }
 
-public class Point {
-    public static int posX;
-    public static int posY;
+class Point {
+    public int posX;
+    public int posY;
 
     public Point(int x, int y) {
         posX = x;
