@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author jaesungna
  */
 public class Main {
-    private static String[][] MAP; // to store the given map
+    private static char[][] MAP; // to store the given map
     private static boolean[][] isVisited; // to store visited location
     private static int[] dx = {0, 1, 0, -1};
     private static int[] dy = {1, 0, -1, 0};
@@ -22,26 +22,23 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int row = sc.nextInt();
         int col = sc.nextInt();
-        MAP = new String[row][col];
+        MAP = new char[row][col];
         isVisited = new boolean[row][col];
+        sc.nextLine();
 
-        sc.useDelimiter("");
-        sc.next();
         for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                MAP[i][j] = sc.next();
-            }
-            sc.next();
+            String temp = sc.nextLine();
+            MAP[i] = temp.toCharArray();
         }
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                if (MAP[i][j].equals("L")) {
+                if (MAP[i][j]=='L') {
                     initVisited();
                     Point curPos = new Point(i, j);
                     int tempMax = bfs(curPos);
-                    if(tempMax>MaxDist){
-                        MaxDist=tempMax;
+                    if (tempMax > MaxDist) {
+                        MaxDist = tempMax;
                     }
                 }
             }
@@ -65,7 +62,7 @@ public class Main {
                 int ny = dy[i] + y;
 
                 if (nx >= 0 && ny >= 0 && nx < MAP.length && ny < MAP[0].length) {
-                    if (isVisited[nx][ny] == false && MAP[nx][ny].equals("L")) {
+                    if (isVisited[nx][ny] == false && MAP[nx][ny]=='L') {
                         Point nextPos = new Point(nx, ny);
                         queue.add(nextPos);
                         isVisited[nx][ny] = true;
@@ -82,7 +79,6 @@ public class Main {
 
     /**
      * Initialising isVisited array
-     *
      */
     private static void initVisited() {
         for (int i = 0; i < isVisited.length; i++) {
