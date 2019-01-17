@@ -13,6 +13,10 @@ import java.util.StringTokenizer;
  * #7569 토마토
  * 알고리즘 분류 : BFS 활용(3차원)
  *
+ * <성능 비교>
+ *      1. scanner : mem(293740kb), time(1464ms)
+ *      2. bufferReader : mem(123264kb), time(600ms)
+ *
  * @author jaesungna
  */
 public class Main {
