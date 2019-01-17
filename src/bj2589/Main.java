@@ -9,6 +9,14 @@ import java.util.Scanner;
  * #2589 보물섬
  * 알고리즘 분류 : BFS(최단 경로 찾기)
  *
+ * 설명
+ *     1. 주어진 matrix와 동안한 크기의 dist 배열을 사용
+ *     2. dist 배열에 이전 위치로부터 이동할 경우 1씩 증가 시켜 저장. 한 위치의 bfs를 통해 얻어진 dist 원소들 중 최댓값을 반환
+ *     3. matrix 내 시작가능한 모든 좌표에서 bfs를 돌려 각 위치에서 나온 최대 dist값 중 최댓값을 결과 값으로 갖음
+ *
+ * 결론
+ *     1. bfs를 이용해 두 정점사이의 최단거리를 찾을 수 있음
+ *
  * @author jaesungna
  */
 public class Main {
