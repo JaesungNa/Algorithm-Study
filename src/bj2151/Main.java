@@ -23,7 +23,7 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         MAP = new String[N][N];
 
-        for(int l)
+
 
 
     }
