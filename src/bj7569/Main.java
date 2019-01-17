@@ -1,9 +1,12 @@
 package bj7569;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /**
  * 백준 알고리즘
@@ -17,76 +20,68 @@ public class Main {
     private static int[] dh = {0, 0, 0, 0, 1, -1};
     private static int[] dw = {0, 0, 1, -1, 0, 0};
     private static int[] dl = {1, -1, 0, 0, 0, 0};
+    private static Queue<Position> queue = new LinkedList<>();
     private static int cnt = 0;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int M = sc.nextInt(); //width
-        int N = sc.nextInt(); //length
-        int H = sc.nextInt(); //height
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(bf.readLine());
+        int M = Integer.parseInt(st.nextToken()); //width
+        int N = Integer.parseInt(st.nextToken()); //length
+        int H = Integer.parseInt(st.nextToken()); //height
         MAP = new int[H][N][M];
 
-        int MAX = 0;
+
+        int minDays = 0;
 
         for (int h = 0; h < H; h++) {
             for (int l = 0; l < N; l++) {
+                st = new StringTokenizer(bf.readLine());
                 for (int w = 0; w < M; w++) {
-                    MAP[h][l][w] = sc.nextInt();
+                    MAP[h][l][w] = Integer.parseInt(st.nextToken());
                     if (MAP[h][l][w] == 0) {
                         cnt++;
-                    }
-                }
-            }
-        }
-
-        for (int h = 0; h < H; h++) {
-            for (int l = 0; l < N; l++) {
-                for (int w = 0; w < M; w++) {
-                    if (MAP[h][l][w] == 1) {
+                    } else if (MAP[h][l][w] == 1) {
                         Position pos = new Position(h, l, w);
-                        int tempMax = bfs(M, N, H, pos);
-                        if (cnt > 0) {
-                            MAX = -1;
-                        } else if (MAX < tempMax) {
-                            MAX = tempMax;
-                        }
+                        queue.add(pos);
+                        MAP[h][l][w] = 1;
                     }
                 }
             }
         }
-        System.out.println(MAX);
+        minDays = bfs(M, N, H);
+        if(cnt>0){
+            minDays=-1;
+        }
+        System.out.println(minDays);
     }
 
-    public static int bfs(int M, int N, int H, Position pos) {
-        int tempMax = 0;
-        int[][][] dist = new int[H][N][M];
-        Queue<Position> queue = new LinkedList<>();
-        queue.add(pos);
+    public static int bfs(int M, int N, int H) {
+        int days = -1;
         while (!queue.isEmpty()) {
-            Position tempPos = queue.poll();
-            int h = tempPos.h;
-            int w = tempPos.w;
-            int l = tempPos.l;
-            MAP[h][l][w] = 1;
-            for (int cur = 0; cur < 6; cur++) {
-                int nh = dh[cur] + h;
-                int nw = dw[cur] + w;
-                int nl = dl[cur] + l;
-                if (nh >= 0 && nw >= 0 && nl >= 0 && nh < H && nl < N && nw < M) {
-                    if (MAP[nh][nl][nw] == 0) {
-                        cnt--;
-                        Position newPos = new Position(nh, nl, nw);
-                        queue.add(newPos);
-                        MAP[nh][nl][nw] = 1;
-                        dist[nh][nl][nw] = dist[h][l][w] + 1;
-                        if (tempMax < dist[nh][nl][nw]) {
-                            tempMax = dist[nh][nl][nw];
+            int size = queue.size();
+            days++;
+            for (int i = 0; i < size; i++) {
+                Position tempPos = queue.poll();
+                int h = tempPos.h;
+                int w = tempPos.w;
+                int l = tempPos.l;
+                for (int cur = 0; cur < 6; cur++) {
+                    int nh = dh[cur] + h;
+                    int nw = dw[cur] + w;
+                    int nl = dl[cur] + l;
+                    if (nh >= 0 && nw >= 0 && nl >= 0 && nh < H && nl < N && nw < M) {
+                        if (MAP[nh][nl][nw] == 0) {
+                            cnt--;
+                            Position newPos = new Position(nh, nl, nw);
+                            queue.add(newPos);
+                            MAP[nh][nl][nw] = 1;
                         }
                     }
                 }
             }
         }
-        return tempMax;
+        return days;
     }
 }
 
