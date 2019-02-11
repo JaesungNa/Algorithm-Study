@@ -38,11 +38,9 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         for (int i = 0; i <= max; i++) {
-            if (cum[i] != 0) {
-                while (cum[i] > 0) {
-                    bw.write(i+"\n");
-                    cum[i]--;
-                }
+            while (cum[i] > 0) {
+                bw.write(i + "\n");
+                cum[i]--;
             }
         }
         bw.flush();
