@@ -26,10 +26,18 @@ public class Main {
             int temp = Integer.parseInt((new StringTokenizer(br.readLine())).nextToken());
             ARRAY[cnt] = temp;
         }
-        insertionSort();
+        bubbleSort();
         print();
     }
 
+    /**
+     * [min value is re-located at the start of array]
+     * 1. 1st loop : scan from 0 to length-1
+     * 2. minIndex : to store location of the minimum value in the array
+     * 3. 2nd loop : in order to compare every single values in array to find the min value
+     * 4. when compareTo-value(j) is smaller than compareFrom-value(minIndex), keep new value
+     * 5. swap value after each search
+     */
     public static void selectionSort() {
         for (int i = 0; i < ARRAY.length; i++) {
             int minIndex = i;
@@ -41,16 +49,16 @@ public class Main {
             swap(i, minIndex);
         }
     }
-    public static void selectSort(){
-        for(int i=0;i<ARRAY.length;i++){
-            int i_max=i;
-            int max = arr[]
-        }
-    }
 
+    /**
+     * [searching range reduced from back since larger values is re-located at back of array]
+     * 1. 1st loop: searching range set, range reduces from back
+     * 2. 2nd loop: scan from 1 to length-1
+     * 3. when compareTo-value(j) is smaller than compareFrom-value(j-1), swap value (always "j" must be larger)
+     */
     public static void bubbleSort() {
-        for (int i = ARRAY.length; i > 0; i--) {
-            for (int j = 1; j < i; j++) {
+        for (int i = ARRAY.length - 1; i > 0; i--) {
+            for (int j = 1; j < ARRAY.length; j++) {
                 if (ARRAY[j - 1] > ARRAY[j]) {
                     swap(j, j - 1);
                 }
@@ -58,6 +66,14 @@ public class Main {
         }
     }
 
+    /**
+     * [searching range gradually increase upto length-1]
+     * 1. 1st loop: define search range(1 to length-1)
+     * 2. store compareFrom-value, and position that the value-found to be re-located
+     * 3. 2nd loop: search for right position within the range
+     * 4. since curValue keeps the compareFrom-value, move the compareTo-value(pos-1) to CompareFrom-value(pos)
+     * 5. if loop breaks position is found to insert curVal
+     */
     public static void insertionSort() {
         for (int i = 1; i < ARRAY.length; i++) {
             int curValue = ARRAY[i];
