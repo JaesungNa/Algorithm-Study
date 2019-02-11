@@ -41,6 +41,12 @@ public class Main {
             swap(i, minIndex);
         }
     }
+    public static void selectSort(){
+        for(int i=0;i<ARRAY.length;i++){
+            int i_max=i;
+            int max = arr[]
+        }
+    }
 
     public static void bubbleSort() {
         for (int i = ARRAY.length; i > 0; i--) {
