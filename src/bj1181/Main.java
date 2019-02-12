@@ -24,13 +24,14 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             list[i] = st.nextToken();
         }
+        br.close();
 
         mergeSort(0, list.length - 1);
         print();
     }
 
     public static void mergeSort(int p, int q) {
-        if ((q - p) <= 1) {
+        if ((q - p) < 1) {
             return;
         }
         int mid = (p + q) / 2;
@@ -47,16 +48,20 @@ public class Main {
         String[] temp = new String[q + 1];
 
         while (i < mid + 1 && j < q + 1) {
-            if (toAschii(list[i], 0) < toAschii(list[j], 0)) {
+            if (list[i].length() < list[j].length()) {
                 temp[k++] = list[i++];
-            } else if (toAschii(list[i], 0) > toAschii(list[j], 0)) {
+            } else if (list[i].length() > list[j].length()) {
                 temp[k++] = list[j++];
             } else {
                 int u = 0;
-                while (toAschii(list[i], u) != toAschii(list[j], u)) {
+                while (u < list[i].length() && (toAschii(list[i], u) == toAschii(list[j], u))) {
                     u++;
                 }
-                if (toAschii(list[i], u) < toAschii(list[j], u)) {
+                if(u==list[i].length()){
+                    temp[k++] = list[i++];
+                    temp[k++] = list[j++];
+                }
+                else if (toAschii(list[i], u) < toAschii(list[j], u)) {
                     temp[k++] = list[i++];
                 } else {
                     temp[k++] = list[j++];
@@ -80,14 +85,19 @@ public class Main {
         return (int) word.charAt(index);
     }
 
-    public static void compa() {
-
-    }
-
     public static void print() throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        for (int i = 0; i < list.length; i++) {
-            bw.write(list[i] + "\n");
+        for (int i = 1; i <= list.length; i++) {
+            if(i==list.length){
+                bw.write(list[i-1] + "\n");
+                break;
+            }
+            if (list[i].equals(list[i - 1])) {
+                continue;
+            }
+            else{
+                bw.write(list[i-1] + "\n");
+            }
         }
         bw.flush();
         bw.close();
