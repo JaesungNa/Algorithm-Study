@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 /**
  * 백준 알고리즘
  * #1181 단어정렬
- * 알고리즘 분류 : 정렬
+ * 알고리즘 분류 : 합병정렬
  *
  * @author jaesungna
  */
