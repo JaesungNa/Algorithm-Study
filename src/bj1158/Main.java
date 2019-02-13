@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 /**
  * 백준 알고리즘
  * #1158 조세퍼스 문제
- * 알고리즘 분류 :
+ * 알고리즘 분류 : circular queue
  *
  * @author jaesungna
  */
