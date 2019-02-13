@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 /**
  * 백준 알고리즘
  * #1021 회전하는 큐
- * 알고리즘 분류 :
+ * 알고리즘 분류 : deque
  *
  * @author jaesungna
  */
@@ -49,11 +49,9 @@ public class Main {
         int countFirst=-1;
         int countBack;
         for(int i=0; i<listM.length;i++){
-
             while(!isFound){
                 curVal=deque.pollFirst();
                 countFirst++;
-
                 if(curVal==listM[i]){
                     isFound=true;
                 }else{
