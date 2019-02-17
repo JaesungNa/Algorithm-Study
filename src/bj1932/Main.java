@@ -37,7 +37,7 @@ public class Main {
                 triangle[i][j++] = Integer.parseInt(st.nextToken());
             }
         }
-        findMax_2();
+        findMax_3();
         System.out.println(result);
     }
 
@@ -95,4 +95,26 @@ public class Main {
             }
         }
     }
+
+    /**
+     * findMax_3: Dynamic Programming with refactored code
+     * result: success
+     */
+    public static void findMax_3() {
+        for (int i = 1; i < triangle.length; i++) {
+            for (int j = 0; j < i + 1; j++) {
+                if (j == 0) {
+                    triangle[i][j] += triangle[i - 1][j];
+                } else if (j == i) {
+                    triangle[i][j] += triangle[i - 1][j - 1];
+                } else {
+                    triangle[i][j] += Math.max(triangle[i - 1][j - 1], triangle[i - 1][j]);
+                }
+                if(result<triangle[i][j]){
+                    result=triangle[i][j];
+                }
+            }
+        }
+    }
+
 }
