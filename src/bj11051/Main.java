@@ -16,23 +16,20 @@ import java.util.StringTokenizer;
  */
 
 public class Main {
-//    public static int[] mem;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
-//        mem = new int[N + 1];
-//        Arrays.fill(mem, -1);
 
-        int result = binoCoef_2(N, K);
+        int result = binoCoef_1(N, K);
         System.out.print(result);
     }
 
     /**
      * binoCoef_!(n, k) : 점화식을 이용한 이항계수 계산 재귀함수
+     * result : 시간초과
      *
      * @param n : 전체 갯수
      * @param k : k 개를 뽑음
@@ -45,11 +42,12 @@ public class Main {
         }
 
         // 2.
-        return binoCoef_1(n - 1, k) + binoCoef_1(n - 1, k - 1);
+        return (binoCoef_1(n - 1, k) + binoCoef_1(n - 1, k - 1))%10007;
     }
 
     /**
      * binoCoef_2(n, k) : DP 와 점화식을 이용한 이항계수 계산 재귀함수
+     * result : correct
      *
      * @param n : 전체 갯수
      * @param k : k 개를 뽑음
