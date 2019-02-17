@@ -20,4 +20,4 @@
 16. \#1021 - 회전하는 큐 : deque
 17. \#11050 - 이항계수 1 : recursion
 18. \#11051 - 이항계수 2 : Dynamic Programming(참고: https://shoark7.github.io/programming/algorithm/3-ways-to-get-binomial-coefficients.html)
-19. \#1932 - 정수 삼각형 : 
+19. \#1932 - 정수 삼각형 : Dynamic Programming
