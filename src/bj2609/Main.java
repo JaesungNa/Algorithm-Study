@@ -62,6 +62,7 @@ public class Main {
             return 1 * LCM(a, b, ++nextPrime);
         }
     }
+
     public static int gcd(int a, int b){
         if (b == 0) return a;
         return gcd(b, a%b);
