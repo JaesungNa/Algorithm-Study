@@ -22,3 +22,4 @@
 18. \#11051 - 이항계수 2 : Dynamic Programming(참고: https://shoark7.github.io/programming/algorithm/3-ways-to-get-binomial-coefficients.html)
 19. \#1932 - 정수 삼각형 : Dynamic Programming
 20. \#2579 - 계단 오르기 : Dynamic Programming
+21. \#9251 -  LCS: Dynamic Programming
