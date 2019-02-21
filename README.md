@@ -23,4 +23,5 @@
 19. \#1932 - 정수 삼각형 : Dynamic Programming
 20. \#2579 - 계단 오르기 : Dynamic Programming
 21. \#9251 -  LCS: Dynamic Programming
-22. \#2609 - 최대공약수와 최소공배수 :
+22. \#2609 - 최대공약수와 최소공배수 : 
+23. \#2293 - 동전 1 : dynamic programming
