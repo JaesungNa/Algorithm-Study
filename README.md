@@ -25,3 +25,4 @@
 21. \#9251 -  LCS: Dynamic Programming
 22. \#2609 - 최대공약수와 최소공배수 : 
 23. \#2293 - 동전 1 : dynamic programming
+24. \#1057 - 토너먼트 :
